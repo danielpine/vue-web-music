@@ -27,18 +27,10 @@ public class ConsumerController {
     @Autowired
     private ConsumerServiceImpl consumerService;
 
-    @Configuration
-    public class MyPicConfig implements WebMvcConfigurer {
-        @Override
-        public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            registry.addResourceHandler("/avatorImages/**").addResourceLocations("file:/Users/hongweiyin/Documents/github-workspace/music-website/music-server/avatorImages/");
-        }
-    }
-
-//    添加用户
+    //    添加用户
     @ResponseBody
     @RequestMapping(value = "/user/add", method = RequestMethod.POST)
-    public Object addUser(HttpServletRequest req){
+    public Object addUser(HttpServletRequest req) {
         JSONObject jsonObject = new JSONObject();
         String username = req.getParameter("username").trim();
         String password = req.getParameter("password").trim();
@@ -50,7 +42,7 @@ public class ConsumerController {
         String location = req.getParameter("location").trim();
         String avator = req.getParameter("avator").trim();
 
-        if (username.equals("") || username == null){
+        if (username.equals("") || username == null) {
             jsonObject.put("code", 0);
             jsonObject.put("msg", "用户名或密码错误");
             return jsonObject;
@@ -60,7 +52,7 @@ public class ConsumerController {
         Date myBirth = new Date();
         try {
             myBirth = dateFormat.parse(birth);
-        } catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         consumer.setUsername(username);
@@ -68,13 +60,13 @@ public class ConsumerController {
         consumer.setSex(new Byte(sex));
         if (phone_num == "") {
             consumer.setPhoneNum(null);
-        } else{
+        } else {
             consumer.setPhoneNum(phone_num);
         }
 
         if (email == "") {
             consumer.setEmail(null);
-        } else{
+        } else {
             consumer.setEmail(email);
         }
         consumer.setBirth(myBirth);
@@ -96,10 +88,10 @@ public class ConsumerController {
         }
     }
 
-//    判断是否登录成功
+    //    判断是否登录成功
     @ResponseBody
     @RequestMapping(value = "/user/login/status", method = RequestMethod.POST)
-    public Object loginStatus(HttpServletRequest req, HttpSession session){
+    public Object loginStatus(HttpServletRequest req, HttpSession session) {
 
         JSONObject jsonObject = new JSONObject();
         String username = req.getParameter("username");
@@ -107,13 +99,13 @@ public class ConsumerController {
 //        System.out.println(username+"  "+password);
         boolean res = consumerService.veritypasswd(username, password);
 
-        if (res){
+        if (res) {
             jsonObject.put("code", 1);
             jsonObject.put("msg", "登录成功");
             jsonObject.put("userMsg", consumerService.loginStatus(username));
             session.setAttribute("username", username);
             return jsonObject;
-        }else {
+        } else {
             jsonObject.put("code", 0);
             jsonObject.put("msg", "用户名或密码错误");
             return jsonObject;
@@ -121,30 +113,30 @@ public class ConsumerController {
 
     }
 
-//    返回所有用户
+    //    返回所有用户
     @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public Object allUser(){
+    public Object allUser() {
         return consumerService.allUser();
     }
 
-//    返回指定ID的用户
+    //    返回指定ID的用户
     @RequestMapping(value = "/user/detail", method = RequestMethod.GET)
-    public Object userOfId(HttpServletRequest req){
+    public Object userOfId(HttpServletRequest req) {
         String id = req.getParameter("id");
         return consumerService.userOfId(Integer.parseInt(id));
     }
 
-//    删除用户
+    //    删除用户
     @RequestMapping(value = "/user/delete", method = RequestMethod.GET)
-    public Object deleteUser(HttpServletRequest req){
+    public Object deleteUser(HttpServletRequest req) {
         String id = req.getParameter("id");
         return consumerService.deleteUser(Integer.parseInt(id));
     }
 
-//    更新用户信息
+    //    更新用户信息
     @ResponseBody
     @RequestMapping(value = "/user/update", method = RequestMethod.POST)
-    public Object updateUserMsg(HttpServletRequest req){
+    public Object updateUserMsg(HttpServletRequest req) {
         JSONObject jsonObject = new JSONObject();
         String id = req.getParameter("id").trim();
         String username = req.getParameter("username").trim();
@@ -158,7 +150,7 @@ public class ConsumerController {
 //        String avator = req.getParameter("avator").trim();
 //        System.out.println(username+"  "+password+"  "+sex+"   "+phone_num+"     "+email+"      "+birth+"       "+introduction+"      "+location);
 
-        if (username.equals("") || username == null){
+        if (username.equals("") || username == null) {
             jsonObject.put("code", 0);
             jsonObject.put("msg", "用户名或密码错误");
             return jsonObject;
@@ -168,7 +160,7 @@ public class ConsumerController {
         Date myBirth = new Date();
         try {
             myBirth = dateFormat.parse(birth);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
         consumer.setId(Integer.parseInt(id));
@@ -184,21 +176,21 @@ public class ConsumerController {
         consumer.setUpdateTime(new Date());
 
         boolean res = consumerService.updateUserMsg(consumer);
-        if (res){
+        if (res) {
             jsonObject.put("code", 1);
             jsonObject.put("msg", "修改成功");
             return jsonObject;
-        }else {
+        } else {
             jsonObject.put("code", 0);
             jsonObject.put("msg", "修改失败");
             return jsonObject;
         }
     }
 
-//    更新用户头像
+    //    更新用户头像
     @ResponseBody
     @RequestMapping(value = "/user/avatar/update", method = RequestMethod.POST)
-    public Object updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id")int id){
+    public Object updateUserPic(@RequestParam("file") MultipartFile avatorFile, @RequestParam("id") int id) {
         JSONObject jsonObject = new JSONObject();
 
         if (avatorFile.isEmpty()) {
@@ -206,36 +198,36 @@ public class ConsumerController {
             jsonObject.put("msg", "文件上传失败！");
             return jsonObject;
         }
-        String fileName = System.currentTimeMillis()+avatorFile.getOriginalFilename();
-        String filePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "avatorImages" ;
+        String fileName = System.currentTimeMillis() + avatorFile.getOriginalFilename();
+        String filePath = System.getProperty("user.dir") + System.getProperty("file.separator") + "avatorImages";
         File file1 = new File(filePath);
-        if (!file1.exists()){
+        if (!file1.exists()) {
             file1.mkdir();
         }
 
         File dest = new File(filePath + System.getProperty("file.separator") + fileName);
-        String storeAvatorPath = "/avatorImages/"+fileName;
+        String storeAvatorPath = "/avatorImages/" + fileName;
         try {
             avatorFile.transferTo(dest);
             Consumer consumer = new Consumer();
             consumer.setId(id);
             consumer.setAvator(storeAvatorPath);
             boolean res = consumerService.updateUserAvator(consumer);
-            if (res){
+            if (res) {
                 jsonObject.put("code", 1);
                 jsonObject.put("avator", storeAvatorPath);
                 jsonObject.put("msg", "上传成功");
                 return jsonObject;
-            }else {
+            } else {
                 jsonObject.put("code", 0);
                 jsonObject.put("msg", "上传失败");
                 return jsonObject;
             }
-        }catch (IOException e){
+        } catch (IOException e) {
             jsonObject.put("code", 0);
-            jsonObject.put("msg", "上传失败"+e.getMessage());
+            jsonObject.put("msg", "上传失败" + e.getMessage());
             return jsonObject;
-        }finally {
+        } finally {
             return jsonObject;
         }
     }
