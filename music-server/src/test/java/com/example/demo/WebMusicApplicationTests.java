@@ -14,7 +14,7 @@ import java.util.Date;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class HwMusicApplicationTests {
+public class WebMusicApplicationTests {
     @Autowired
     private ConsumerServiceImpl consumerService;
 

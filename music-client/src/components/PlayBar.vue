@@ -1,11 +1,11 @@
 <template>
-  <div class="play-bar" :class="{show:!toggle}">
-    <div @click="toggle=!toggle" class="item-up" :class="{turn: toggle}">
+  <div class="play-bar" :class="{ show: !toggle }">
+    <div @click="toggle = !toggle" class="item-up" :class="{ turn: toggle }">
       <svg class="icon" aria-hidden="true">
         <use xlink:href="#icon-jiantou-xia-cuxiantiao"></use>
       </svg>
     </div>
-    <div class="kongjian" >
+    <div class="kongjian">
       <!--上一首-->
       <div class="item" @click="prev">
         <svg class="icon" aria-hidden="true">
@@ -26,7 +26,7 @@
       </div>
       <!--歌曲图片-->
       <div class="item-img" @click="goPlayerPage">
-         <img :src=picUrl alt="">
+        <img :src="picUrl" alt="" />
       </div>
       <!--播放进度-->
       <div class="playing-speed">
@@ -34,17 +34,27 @@
         <div class="current-time">{{ nowTime }}</div>
         <div class="progress-box">
           <div class="item-song-title">
-            <div>{{this.title}}</div>
-            <div>{{this.artist}}</div>
+            <div>{{ this.title }}</div>
+            <div>{{ this.artist }}</div>
           </div>
           <div ref="progress" class="progress" @mousemove="mousemove">
             <!--进度条-->
             <div ref="bg" class="bg" @click="updatemove">
-              <div ref="curProgress" class="cur-progress" :style="{width: curLength+'%'}"></div>
+              <div
+                ref="curProgress"
+                class="cur-progress"
+                :style="{ width: curLength + '%' }"
+              ></div>
             </div>
             <!--进度条 end -->
             <!--拖动的点点-->
-            <div ref="idot" class="idot" :style="{left: curLength+'%'}" @mousedown="mousedown" @mouseup="mouseup"></div>
+            <div
+              ref="idot"
+              class="idot"
+              :style="{ left: curLength + '%' }"
+              @mousedown="mousedown"
+              @mouseup="mouseup"
+            ></div>
             <!--拖动的点点 end -->
           </div>
         </div>
@@ -52,7 +62,7 @@
         <div class="left-time">{{ songTime }}</div>
       </div>
       <!--音量-->
-      <div class="item icon-volume" >
+      <div class="item icon-volume">
         <svg v-if="volume !== 0" class="icon" aria-hidden="true">
           <use xlink:href="#icon-yinliang1"></use>
         </svg>
@@ -150,16 +160,28 @@ export default {
   },
   mounted () {
     this.progressLength = this.$refs.progress.getBoundingClientRect().width
-    document.querySelector('.icon-volume').addEventListener('click', function (e) {
-      document.querySelector('.volume').classList.add('show-volume')
-      e.stopPropagation()
-    }, false)
-    document.querySelector('.volume').addEventListener('click', function (e) {
-      e.stopPropagation()
-    }, false)
-    document.addEventListener('click', function () {
-      document.querySelector('.volume').classList.remove('show-volume')
-    }, false)
+    document.querySelector('.icon-volume').addEventListener(
+      'click',
+      function (e) {
+        document.querySelector('.volume').classList.add('show-volume')
+        e.stopPropagation()
+      },
+      false
+    )
+    document.querySelector('.volume').addEventListener(
+      'click',
+      function (e) {
+        e.stopPropagation()
+      },
+      false
+    )
+    document.addEventListener(
+      'click',
+      function () {
+        document.querySelector('.volume').classList.remove('show-volume')
+      },
+      false
+    )
   },
   methods: {
     // 下载
@@ -310,16 +332,17 @@ export default {
     // 选中播放
     toPlay (url) {
       if (url && url !== this.url) {
-        this.$store.commit('setId', this.listOfSongs[this.listIndex].id)
-        this.$store.commit('setUrl', this.$store.state.configure.HOST + url)
-        this.$store.commit('setpicUrl', this.$store.state.configure.HOST + this.listOfSongs[this.listIndex].pic)
-        this.$store.commit('setTitle', this.replaceFName(this.listOfSongs[this.listIndex].name))
-        this.$store.commit('setArtist', this.replaceLName(this.listOfSongs[this.listIndex].name))
-        this.$store.commit('setLyric', this.parseLyric(this.listOfSongs[this.listIndex].lyric))
+        this.play(
+          this.listOfSongs[this.listIndex].id,
+          url,
+          this.listOfSongs[this.listIndex].pic,
+          this.listOfSongs[this.listIndex].name,
+          this.listOfSongs[this.listIndex].lyric
+        )
       }
     },
     goPlayerPage () {
-      this.$router.push({path: `/lyric/${this.id}`})
+      this.$router.push({ path: `/lyric/${this.id}` })
     },
     collection () {
       if (this.loginIn) {

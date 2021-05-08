@@ -1,6 +1,14 @@
 <template>
   <div class="song-audio">
-    <audio :src='url' controls="controls" ref="player" preload="true" @canplay="startPlay" @timeupdate="timeupdate" @ended="ended">
+    <audio
+      :src="url"
+      controls="controls"
+      ref="player"
+      preload="true"
+      @canplay="startPlay"
+      @timeupdate="timeupdate"
+      @ended="ended"
+    >
       <!--（1）属性：controls，preload（2）事件：canplay，timeupdate，ended（3）方法：play()，pause() -->
       <!--controls：向用户显示音频控件（播放/暂停/进度条/音量）-->
       <!--preload：属性规定是否在页面加载后载入音频-->
@@ -54,6 +62,7 @@ export default {
     },
     // 获取歌曲链接后准备播放
     startPlay () {
+      console.log('startPlay()' + this.id)
       let player = this.$refs.player
       //  记录音乐时长
       this.$store.commit('setDuration', player.duration)
@@ -68,6 +77,7 @@ export default {
     },
     // 音乐播放结束时触发
     ended () {
+      console.log('ended()' + this.id)
       this.$store.commit('setIsPlay', false)
       this.$store.commit('setCurTime', 0)
       this.$store.commit('setAutoNext', !this.autoNext)

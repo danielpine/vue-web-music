@@ -3,46 +3,41 @@ import { mapGetters } from 'vuex'
 
 const mixin = {
   computed: {
-    ...mapGetters([
-      'userId',
-      'loginIn'
-    ])
+    ...mapGetters(['userId', 'loginIn'])
   },
   methods: {
     // 提示信息
-    notify(title, type) {
+    notify (title, type) {
       this.$notify({
         title: title,
         type: type
       })
     },
     // 获取图片信息
-    attachImageUrl(srcUrl) {
-      return srcUrl ? this.$store.state.configure.HOST + srcUrl || '../assets/img/user.jpg' : ''
+    attachImageUrl (srcUrl) {
+      return srcUrl
+        ? this.$store.state.configure.HOST + srcUrl || '../assets/img/user.jpg'
+        : ''
     },
-    attachBirth(val) {
+    attachBirth (val) {
       let birth = String(val).match(/[0-9-]+(?=\s)/)
       return Array.isArray(birth) ? birth[0] : birth
     },
     // 得到名字后部分
-    replaceFName(str) {
+    replaceFName (str) {
       let arr = str.split('-')
       return arr[1]
     },
     // 得到名字前部分
-    replaceLName(str) {
+    replaceLName (str) {
       let arr = str.split('-')
       return arr[0]
     },
     // 播放
     toplay: function (id, url, pic, index, name, lyric) {
-      this.$store.commit('setId', id)
+      console.log('toplay: function (id, url, pic, index, name, lyric)')
       this.$store.commit('setListIndex', index)
-      this.$store.commit('setUrl', this.$store.state.configure.HOST + url)
-      this.$store.commit('setpicUrl', this.$store.state.configure.HOST + pic)
-      this.$store.commit('setTitle', this.replaceFName(name))
-      this.$store.commit('setArtist', this.replaceLName(name))
-      this.$store.commit('setLyric', this.parseLyric(lyric))
+      this.play(id, url, pic, name, lyric)
       if (this.loginIn) {
         this.$store.commit('setIsActive', false)
         getCollectionOfUser(this.userId)
@@ -59,14 +54,23 @@ const mixin = {
           })
       }
     },
+    play: function (id, url, pic, name, lyric) {
+      console.log('play: function (id, url, pic, index, name, lyric)')
+      this.$store.commit('setId', id)
+      this.$store.commit('setUrl', this.$store.state.configure.HOST + url)
+      this.$store.commit('setpicUrl', this.$store.state.configure.HOST + pic)
+      this.$store.commit('setTitle', this.replaceFName(name))
+      this.$store.commit('setArtist', this.replaceLName(name))
+      this.$store.commit('setLyric', this.parseLyric(lyric))
+    },
     // 解析歌词
-    parseLyric(text) {
+    parseLyric (text) {
       let lines = text.split('\n')
       let pattern = /\[\d{2}:\d{2}.(\d{3}|\d{2})\]/g
       let result = []
 
       // 对于歌词格式不对的特殊处理
-      if (!(/\[.+\]/.test(text))) {
+      if (!/\[.+\]/.test(text)) {
         return [[0, text]]
       }
 
@@ -91,7 +95,7 @@ const mixin = {
       return result
     },
     // 搜索音乐
-    getSong() {
+    getSong () {
       if (!this.$route.query.keywords) {
         this.$store.commit('setListOfSongs', [])
         return
