@@ -1,7 +1,9 @@
 package com.example.demo;
 
 import com.example.demo.domain.Consumer;
+import com.example.demo.service.SongListService;
 import com.example.demo.service.impl.ConsumerServiceImpl;
+import com.example.demo.service.impl.SongListServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,12 +15,13 @@ import java.util.Date;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class HwMusicApplicationTests {
-
     @Autowired
-//    private SongServiceImpl songService;
-//    private SingerServiceImpl singerService;
-//    private SongListServiceImpl songListService;
     private ConsumerServiceImpl consumerService;
+
+    //    private SongServiceImpl songService;
+//    private SingerServiceImpl singerService;
+    @Autowired
+    private SongListService songListService;
 //    private RankServiceImpl rankService;
 
 //    @Test
@@ -81,30 +84,29 @@ public class HwMusicApplicationTests {
 //        songList.setStyle("乐器");
 //        songListService.addSongList(songList);
 //    }
-//    @Test
-//    public void songListTest2()
-//    {
-//        System.out.println(songListService.allSongList());
-//    }
+    @Test
+    public void songListTest2() {
+        System.out.println(songListService.likeStyle("乐器"));
+    }
 
-//用户
-@Test
-public void consumerTest(){
+    //用户
+    @Test
+    public void consumerTest() {
 
-    Consumer consumer = new Consumer();
-    consumer.setUsername("test");
-    consumer.setPassword("123");
-    consumer.setSex(new Byte("0"));
-    consumer.setPhoneNum("15666412237");
-    consumer.setEmail("1239679@qq.com");
-    consumer.setBirth(new Date());
-    consumer.setIntroduction("");
-    consumer.setLocation("");
-    consumer.setAvator("/img/user.jpg");
-    consumer.setCreateTime(new Date());
-    consumer.setUpdateTime(new Date());
-    consumerService.addUser(consumer);
-}
+        Consumer consumer = new Consumer();
+        consumer.setUsername("test");
+        consumer.setPassword("123");
+        consumer.setSex(new Byte("0"));
+        consumer.setPhoneNum("15666412237");
+        consumer.setEmail("1239679@qq.com");
+        consumer.setBirth(new Date());
+        consumer.setIntroduction("");
+        consumer.setLocation("");
+        consumer.setAvator("/img/user.jpg");
+        consumer.setCreateTime(new Date());
+        consumer.setUpdateTime(new Date());
+        consumerService.addUser(consumer);
+    }
 //    @Test
 //    public void consumerTest2()
 //    {
