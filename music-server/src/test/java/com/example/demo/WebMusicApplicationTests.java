@@ -1,16 +1,16 @@
 package com.example.demo;
 
-import com.example.demo.domain.Consumer;
-import com.example.demo.service.SongListService;
-import com.example.demo.service.impl.ConsumerServiceImpl;
-import com.example.demo.service.impl.SongListServiceImpl;
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Date;
+import com.example.demo.domain.Consumer;
+import com.example.demo.service.SongListService;
+import com.example.demo.service.impl.ConsumerServiceImpl;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

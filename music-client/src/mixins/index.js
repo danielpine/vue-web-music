@@ -64,7 +64,7 @@ const mixin = {
       if (this.loginIn && url && url !== this.url) {
         var params = new URLSearchParams()
         params.append('userId', this.userId)
-        params.append('songId', this.id)
+        params.append('songId', id)
         updateSongHistory(params)
           .then(res => {
             if (res.code === 1) {

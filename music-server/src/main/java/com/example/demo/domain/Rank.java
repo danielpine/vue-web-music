@@ -4,43 +4,45 @@ import java.io.Serializable;
 
 public class Rank implements Serializable {
 
-    private Long id;
+	private static final long serialVersionUID = 1L;
 
-    private Long songListId;
+	private Long id;
 
-    private Long consumerId;
+	private Long songListId;
 
-    private Integer score;
+	private Long consumerId;
 
-    public Long getId() {
-        return id;
-    }
+	private Integer score;
 
-    public void setId(Long id) {
-        this.id = id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public Long getSongListId() {
-        return songListId;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setSongListId(Long songListId) {
-        this.songListId = songListId;
-    }
+	public Long getSongListId() {
+		return songListId;
+	}
 
-    public Long getConsumerId() {
-        return consumerId;
-    }
+	public void setSongListId(Long songListId) {
+		this.songListId = songListId;
+	}
 
-    public void setConsumerId(Long consumerId) {
-        this.consumerId = consumerId;
-    }
+	public Long getConsumerId() {
+		return consumerId;
+	}
 
-    public Integer getScore() {
-        return score;
-    }
+	public void setConsumerId(Long consumerId) {
+		this.consumerId = consumerId;
+	}
 
-    public void setScore(Integer score) {
-        this.score = score;
-    }
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 }

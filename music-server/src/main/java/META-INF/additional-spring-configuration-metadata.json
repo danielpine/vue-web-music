@@ -1,0 +1,47 @@
+{"properties": [
+  {
+    "name": "external.resource.path.prefix",
+    "type": "java.lang.String",
+    "description": "A description for 'external.resource.path.prefix'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  },
+  {
+    "name": "spring.server.MaxFileSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxFileSize'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  },
+  {
+    "name": "spring.server.MaxFileSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxFileSize'"
+  },
+  {
+    "name": "spring.server.MaxRequestSize",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.server.MaxRequestSize'"
+  }
+]}

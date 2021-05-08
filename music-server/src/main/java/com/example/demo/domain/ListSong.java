@@ -6,38 +6,43 @@ import java.io.Serializable;
 
 public class ListSong implements Serializable {
 
-    private Integer id;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
-    private Integer songId;
+	private Integer id;
 
-    private Integer songListId;
+	private Integer songId;
 
-    public Integer getId() {
-        return id;
-    }
+	private Integer songListId;
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
+	public Integer getId() {
+		return id;
+	}
 
-    public Integer getSongId() {
-        return songId;
-    }
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
-    public void setSongId(Integer songId) {
-        this.songId = songId;
-    }
+	public Integer getSongId() {
+		return songId;
+	}
 
-    public Integer getSongListId() {
-        return songListId;
-    }
+	public void setSongId(Integer songId) {
+		this.songId = songId;
+	}
 
-    public void setSongListId(Integer songListId) {
-        this.songListId = songListId;
-    }
+	public Integer getSongListId() {
+		return songListId;
+	}
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this);
-    }
+	public void setSongListId(Integer songListId) {
+		this.songListId = songListId;
+	}
+
+	@Override
+	public String toString() {
+		return ToStringBuilder.reflectionToString(this);
+	}
 }
