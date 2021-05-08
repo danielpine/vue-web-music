@@ -75,3 +75,7 @@ export const download = (url) => axios({
   url: url,
   responseType: 'blob'
 })
+
+// =======================> 评论 API
+// 添加评论
+export const updateSongHistory = (params) => post(`history/update`, params)

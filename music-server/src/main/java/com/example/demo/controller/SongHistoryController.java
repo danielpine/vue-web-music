@@ -18,13 +18,14 @@ import java.util.Date;
 
 @RestController
 @Controller
+@RequestMapping(value = "/history")
 public class SongHistoryController {
 
     @Autowired
     private SongHistoryService songHistoryService;
 
     @ResponseBody
-    @RequestMapping(value = "/history/update", method = RequestMethod.POST)
+    @RequestMapping(value = "/update", method = RequestMethod.POST)
     public Result update(HttpServletRequest req) {
         String userId = req.getParameter("userId");
         String songId = req.getParameter("songId");

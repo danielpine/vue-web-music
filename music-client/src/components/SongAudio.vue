@@ -4,10 +4,10 @@
       :src="url"
       controls="controls"
       ref="player"
-      preload="true"
       @canplay="startPlay"
       @timeupdate="timeupdate"
       @ended="ended"
+      autostart="0"
     >
       <!--（1）属性：controls，preload（2）事件：canplay，timeupdate，ended（3）方法：play()，pause() -->
       <!--controls：向用户显示音频控件（播放/暂停/进度条/音量）-->
@@ -36,6 +36,7 @@ export default {
       'autoNext' // 用于触发自动播放下一首
     ])
   },
+  mounted () {},
   watch: {
     // 监听播放还是暂停
     isPlay () {
@@ -62,13 +63,15 @@ export default {
     },
     // 获取歌曲链接后准备播放
     startPlay () {
-      console.log('startPlay()' + this.id)
-      let player = this.$refs.player
-      //  记录音乐时长
-      this.$store.commit('setDuration', player.duration)
-      //  开始播放
-      player.play()
-      this.$store.commit('setIsPlay', true)
+      if (this.isPlay) {
+        console.log('startPlay()' + this.id)
+        let player = this.$refs.player
+        //  记录音乐时长
+        this.$store.commit('setDuration', player.duration)
+        //  开始播放
+        player.play()
+        // this.$store.commit('setIsPlay', true)
+      }
     },
     // 音乐播放时记录音乐的播放位置
     timeupdate () {

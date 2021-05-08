@@ -1,9 +1,13 @@
-import { getSongOfSingerName, getCollectionOfUser } from '../api/index'
+import {
+  getSongOfSingerName,
+  getCollectionOfUser,
+  updateSongHistory
+} from '../api/index'
 import { mapGetters } from 'vuex'
 
 const mixin = {
   computed: {
-    ...mapGetters(['userId', 'loginIn'])
+    ...mapGetters(['userId', 'loginIn', 'url'])
   },
   methods: {
     // 提示信息
@@ -35,7 +39,6 @@ const mixin = {
     },
     // 播放
     toplay: function (id, url, pic, index, name, lyric) {
-      console.log('toplay: function (id, url, pic, index, name, lyric)')
       this.$store.commit('setListIndex', index)
       this.play(id, url, pic, name, lyric)
       if (this.loginIn) {
@@ -55,9 +58,30 @@ const mixin = {
       }
     },
     play: function (id, url, pic, name, lyric) {
-      console.log('play: function (id, url, pic, index, name, lyric)')
+      url = this.$store.state.configure.HOST + url
+      console.log(url, this.url)
+      this.$store.commit('setIsPlay', true)
+      if (this.loginIn && url && url !== this.url) {
+        var params = new URLSearchParams()
+        params.append('userId', this.userId)
+        params.append('songId', this.id)
+        updateSongHistory(params)
+          .then(res => {
+            if (res.code === 1) {
+              this.notify(res.msg, 'success')
+            } else {
+              this.$notify.error({
+                title: '更新失败',
+                showClose: false
+              })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
       this.$store.commit('setId', id)
-      this.$store.commit('setUrl', this.$store.state.configure.HOST + url)
+      this.$store.commit('setUrl', url)
       this.$store.commit('setpicUrl', this.$store.state.configure.HOST + pic)
       this.$store.commit('setTitle', this.replaceFName(name))
       this.$store.commit('setArtist', this.replaceLName(name))
