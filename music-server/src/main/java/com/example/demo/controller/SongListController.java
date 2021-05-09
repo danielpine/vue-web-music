@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,14 +17,17 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.demo.domain.SongList;
-import com.example.demo.service.impl.SongListServiceImpl;
+import com.example.demo.service.RecommendService;
+import com.example.demo.service.SongListService;
 
 @RestController
 @Controller
 public class SongListController {
 
 	@Autowired
-	private SongListServiceImpl songListService;
+	private SongListService songListService;
+	@Autowired
+	private RecommendService recommendService;
 
 	// 添加歌单
 	@ResponseBody
@@ -57,6 +61,11 @@ public class SongListController {
 	@RequestMapping(value = "/songList", method = RequestMethod.GET)
 	public Object allSongList() {
 		return songListService.allSongList();
+	}
+
+	@RequestMapping(value = "/songList/recommend/{userid}", method = RequestMethod.GET)
+	public Object recommendSongList(@PathVariable() Integer userid) {
+		return recommendService.recommend(userid);
 	}
 
 	// 返回指定标题对应的歌单
