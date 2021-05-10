@@ -2,18 +2,18 @@
   <div class="song-list-album">
     <div class="album-slide">
       <div class="album-img">
-        <img :src=attachImageUrl(singers.pic) alt="">
+        <img :src="attachImageUrl(singers.pic)" alt="" />
       </div>
       <div class="album-info">
         <h2>简介：</h2>
         <span>
-          {{singers.introduction}}
+          {{ singers.introduction }}
         </span>
       </div>
     </div>
     <div class="album-content">
       <div class="album-title">
-        <p>{{singers.title}}</p>
+        <p>{{ singers.title }}</p>
       </div>
       <!--评分-->
       <div class="album-score">
@@ -23,7 +23,7 @@
             <el-rate v-model="value5" disabled></el-rate>
           </div>
         </div>
-        <span>{{value5 * 2}}</span>
+        <span>{{ value5 * 2 }}</span>
         <div>
           <h3>评价：</h3>
           <div @click="pushValue()">
@@ -47,7 +47,13 @@ import { mapGetters } from 'vuex'
 import mixin from '../mixins'
 import AlbumContent from '../components/AlbumContent'
 import Comment from '../components/Comment'
-import { getRankOfSongListId, setRank, getSongOfId, getListSongOfSongId } from '../api/index'
+import {
+  getRankOfSongListId,
+  setRank,
+  getRank,
+  getSongOfId,
+  getListSongOfSongId
+} from '../api/index'
 
 export default {
   name: 'song-list-album',
@@ -80,6 +86,7 @@ export default {
     this.singers = this.tempList
     this.getSongId() // 获取歌单里面的歌曲ID
     this.getRank(this.songListId) // 获取评分
+    this.getValue()
   },
   methods: {
     // 收集歌单里面的歌曲
@@ -117,6 +124,22 @@ export default {
         })
     },
     // 提交评分
+    getValue () {
+      if (this.loginIn) {
+        let params = new URLSearchParams()
+        params.append('songListId', this.songListId)
+        params.append('consumerId', this.userId)
+        getRank(params)
+          .then(res => {
+            if (res.code === 1) {
+              this.value3 = res.data / 2
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      }
+    },
     pushValue () {
       if (this.loginIn) {
         let params = new URLSearchParams()

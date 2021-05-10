@@ -43,6 +43,8 @@ export const setCollection = params => post(`collection/add`, params)
 // =======================> 评分 API
 // 提交评分
 export const setRank = params => post(`rank/add`, params)
+// 获取用户评分
+export const getRank = params => post(`rank/get`, params)
 // 获取指定歌单的评分
 export const getRankOfSongListId = songListId =>
   get(`rank?songListId=${songListId}`)

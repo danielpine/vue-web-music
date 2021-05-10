@@ -28,13 +28,10 @@ public class RecommendService {
 		List<SongTag> userHistoryTags = recommendMapper.getUserHistory(userId);
 		userTagList.addAll(userCollectTags);
 		userTagList.addAll(userHistoryTags);
-		System.out.println(userTagList);
 		if (!userTagList.isEmpty()) {
 			Map<String, Integer> map = userTagList.stream().collect(
 			        Collectors.toMap(SongTag::getTag, SongTag::getScore, (a, b) -> a + b));
-			System.out.println(JSONObject.toJSONString(map, true));
 			Integer sum = map.values().stream().reduce(Integer::sum).orElse(0);
-			System.out.println(sum);
 			ArrayList<SongList> recommendSongList = new ArrayList<>();
 			map.forEach((style, score) -> {
 				Integer limit = (int) Math.ceil(((((float) score) / sum) * recommendCount));

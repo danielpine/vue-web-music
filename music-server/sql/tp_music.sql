@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50731
 File Encoding         : 65001
 
-Date: 2021-05-08 18:20:40
+Date: 2021-05-10 11:35:34
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -110,7 +110,7 @@ INSERT INTO `comment` VALUES ('20', '1', '21', null, '好听啊', '2019-01-06 20
 INSERT INTO `comment` VALUES ('23', '1', null, '5', '赞！！', '2019-01-08 01:05:27', '1', '2');
 INSERT INTO `comment` VALUES ('24', '5', null, '1', '超喜欢！', '2019-01-08 21:46:29', '1', '0');
 INSERT INTO `comment` VALUES ('25', '5', null, '5', '大爱我林！', '2019-01-08 21:47:45', '1', '1');
-INSERT INTO `comment` VALUES ('26', '5', null, '2', 'nice', '2019-01-08 22:11:23', '1', '1');
+INSERT INTO `comment` VALUES ('26', '5', null, '2', 'nice', '2019-01-08 22:11:23', '1', '10');
 INSERT INTO `comment` VALUES ('27', '1', null, '0', '很有感觉', '2019-01-08 22:32:51', '1', '2');
 INSERT INTO `comment` VALUES ('28', '5', '26', null, '好听', '2019-01-08 22:42:07', '0', '0');
 INSERT INTO `comment` VALUES ('29', '5', '21', null, 'nice!', '2019-01-08 22:57:08', '0', '0');
@@ -168,7 +168,7 @@ CREATE TABLE `consumer` (
 -- ----------------------------
 -- Records of consumer
 -- ----------------------------
-INSERT INTO `consumer` VALUES ('1', 'Yin', '123', '0', '13776412237', 'yoona@qq.com', '2019-05-24 00:00:00', '好好吃饭', '山西', '/avatorImages/1556202448064L1.jpg', '2019-01-04 21:42:24', '2020-04-05 03:35:12');
+INSERT INTO `consumer` VALUES ('1', 'user', '123', '0', '13776412237', 'yoona@qq.com', '2019-05-24 00:00:00', '好好吃饭', '山西', '/avatorImages/1556202448064L1.jpg', '2019-01-04 21:42:24', '2020-04-05 03:35:12');
 INSERT INTO `consumer` VALUES ('2', '012', '012', '0', '13754803255', 'love@gmail.com', '2019-04-24 00:00:00', '我就喜欢吃', '北京', '/img/user.jpg', '2019-01-05 15:02:45', '2020-03-23 01:24:59');
 INSERT INTO `consumer` VALUES ('5', '789', '789', '0', '13634377258', '666@126.com', '2019-01-08 21:15:48', '今天很开心啊', '山西', '/avatorImages/1552354056660L1.jpg', '2019-01-07 16:16:42', '2019-01-08 21:15:48');
 INSERT INTO `consumer` VALUES ('8', 'tawuhen', '123', '0', '', '192673541@qq.com', '2019-04-25 18:58:39', '你好', '北京', '/img/user.jpg', '2019-04-25 00:28:58', '2019-04-25 18:58:39');
@@ -415,13 +415,13 @@ CREATE TABLE `rank` (
   `score` int(10) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `consumerId` (`consumerId`,`songListId`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rank
 -- ----------------------------
 INSERT INTO `rank` VALUES ('1', '2', '1', '7');
-INSERT INTO `rank` VALUES ('2', '2', '2', '3');
+INSERT INTO `rank` VALUES ('2', '2', '2', '8');
 INSERT INTO `rank` VALUES ('3', '1', '1', '4');
 INSERT INTO `rank` VALUES ('7', '13', '1', '5');
 INSERT INTO `rank` VALUES ('19', '21', '1', '5');
